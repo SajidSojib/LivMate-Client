@@ -9,8 +9,10 @@ const MainLayout = () => {
         <div className="bg-neutral">
           <Navbar></Navbar>
         </div>
-        <Outlet></Outlet>
-        <div className='bg-neutral'>
+        <div className='min-h-[calc(100vh-463px)]'>
+          <Outlet></Outlet>
+        </div>
+        <div className="bg-neutral">
           <Footer></Footer>
         </div>
       </div>
