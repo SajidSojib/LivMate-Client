@@ -10,7 +10,9 @@ const MainLayout = () => {
           <Navbar></Navbar>
         </div>
         <Outlet></Outlet>
-        <Footer></Footer>
+        <div className='bg-neutral'>
+          <Footer></Footer>
+        </div>
       </div>
     );
 };

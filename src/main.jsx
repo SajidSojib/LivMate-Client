@@ -6,6 +6,7 @@ import MainLayout from './Layouts/MainLayout';
 import Home from './Pages/home/Home';
 import AddRoommate from './Pages/addroommate/AddRoommate';
 import Error from './Pages/Error';
+import BrowseListing from './Pages/browselisting/BrowseListing';
 
 const router = createBrowserRouter([
   {
@@ -19,13 +20,17 @@ const router = createBrowserRouter([
       {
         path: "/addroommate",
         Component: AddRoommate,
-      }
-    ]
+      },
+      {
+        path: "browseListings",
+        Component: BrowseListing
+      },
+    ],
   },
   {
     path: "*",
-    Component: Error
-  }
+    Component: Error,
+  },
 ]);
 createRoot(document.getElementById("root")).render(
   <StrictMode>
