@@ -4,11 +4,14 @@ import { Outlet } from 'react-router';
 import Footer from '../Components/footer/Footer';
 const MainLayout = () => {
     return (
-        <div>
-            <Navbar></Navbar>
-            <Outlet></Outlet>
-            <Footer></Footer>
+      <div className="bg-theme text-primary">
+        {/* bg-gradient-to-l from-[#090979] via-[#00D4FF] to-[#00D4FF] */}
+        <div className="bg-neutral">
+          <Navbar></Navbar>
         </div>
+        <Outlet></Outlet>
+        <Footer></Footer>
+      </div>
     );
 };
 
