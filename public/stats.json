@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "icon": "👥",
+    "stat": "12.4",
+    "label": "Active Users",
+    "subtitle": "Over 12,000 individuals actively searching for roommates across various cities and lifestyles."
+  },
+  {
+    "id": 2,
+    "icon": "📄",
+    "stat": "3.5",
+    "label": "Listings This Month",
+    "subtitle": "Thousands of new roommate listings are posted every month by users looking for the perfect match."
+  },
+  {
+    "id": 3,
+    "icon": "💬",
+    "stat": "25.1",
+    "label": "Chats Started",
+    "subtitle": "Tens of thousands of users have connected and started conversations to find their ideal living partners."
+  }
+]

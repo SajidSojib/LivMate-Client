@@ -15,6 +15,12 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        hydrateFallbackElement: (
+          <div className="flex items-center justify-center h-screen">
+            <span className="loading loading-dots loading-xl"></span>
+          </div>
+        ),
+        loader: ()=>fetch('/stats.json'),
         Component: Home,
       },
       {
@@ -33,7 +39,13 @@ const router = createBrowserRouter([
   },
 ]);
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  <StrictMode
+    fallback={
+      <div className="flex items-center justify-center h-screen">
+        <span className="loading loading-spinner loading-xl"></span>
+      </div>
+    }
+  >
     <RouterProvider router={router} />
   </StrictMode>
 );
