@@ -7,6 +7,10 @@ import Home from './Pages/home/Home';
 import AddRoommate from './Pages/addroommate/AddRoommate';
 import Error from './Pages/Error';
 import BrowseListing from './Pages/browselisting/BrowseListing';
+import AuthProvider from './Utility/AuthProvider';
+import { ToastContainer } from 'react-toastify';
+import Login from './Pages/login/Login';
+
 
 const router = createBrowserRouter([
   {
@@ -31,6 +35,10 @@ const router = createBrowserRouter([
         path: "browseListings",
         Component: BrowseListing
       },
+      {
+        path:'/login',
+        Component: Login
+      }
     ],
   },
   {
@@ -46,6 +54,9 @@ createRoot(document.getElementById("root")).render(
       </div>
     }
   >
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+      <ToastContainer></ToastContainer>
+    </AuthProvider>
   </StrictMode>
 );
