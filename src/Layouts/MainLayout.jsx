@@ -3,7 +3,13 @@ import Navbar from '../Components/navbar/Navbar';
 import { Outlet } from 'react-router';
 import Footer from '../Components/footer/Footer';
 import { Suspense } from 'react';
+import { useEffect } from 'react';
+import AOS from "aos";
+import "aos/dist/aos.css";
 const MainLayout = () => {
+  useEffect(() => {
+    AOS.init({ duration: 1000, anchorPlacement: "top-center" });
+  }, []);
     return (
       <div className="bg-theme text-primary">
         {/* bg-gradient-to-l from-[#090979] via-[#00D4FF] to-[#00D4FF] */}

@@ -1,0 +1,27 @@
+[
+  {
+    "id": "1",
+    "question": "How do I create a roommate listing?",
+    "answer": "To create a listing, go to the 'Add Listing' page from the navigation menu. Fill out details like title, location, rent, preferences, and your contact info, then click 'Add'."
+  },
+  {
+    "id": "2",
+    "question": "Is my contact information visible to others?",
+    "answer": "Yes, your contact info will be visible on the listing detail page so potential roommates can reach out to you directly."
+  },
+  {
+    "id":"3",
+    "question": "Can I update or delete my listing later?",
+    "answer": "Absolutely! Visit the 'My Listings' page (only visible when you're logged in), where you can edit or delete any of your listings."
+  },
+  {
+    "id":"4",
+    "question": "Is this platform free to use?",
+    "answer": "Yes, our platform is completely free to use for all users. No subscription or payment is required."
+  },
+  {
+    "id":"5",
+    "question": "How do I contact someone about their listing?",
+    "answer": "Click on the 'See More' button in the Browse Listings page to view full details and use the provided contact info to reach out."
+  }
+]

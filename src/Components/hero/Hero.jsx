@@ -41,15 +41,16 @@ const Hero = () => {
             }}
           >
             <div className="py-64 rounded-xl space-y-3 bg-gradient-to-t from-[#e2141410] via-[#0f0f0fa1] to-[#0f0f0fde]">
-              <h1 className="text-4xl opacity-100 text-white font-bold">
+              <h1 data-aos={'zoom-in'} className="text-4xl opacity-100 text-white font-bold">
                 Find the Right Roommate
               </h1>
-              <p className="text-white opacity-80 w-3/4 mx-auto">
+              <p data-aos={'fade-up'} className="text-white opacity-80 w-3/4 mx-auto">
                 Easily create a detailed listing with your location, rent,
                 lifestyle preferences, and more. Connect with people who truly
                 match your needs and living style.
               </p>
               <Link
+                data-aos={'fade-up'}
                 to={"/addroommate"}
                 className="relative mt-3 inline-block px-4 py-2 font-medium group"
               >
@@ -70,15 +71,16 @@ const Hero = () => {
             }}
           >
             <div className="py-64 rounded-xl space-y-3 bg-gradient-to-t from-[#e2141410] via-[#0f0f0fa1] to-[#0f0f0fde]">
-              <h1 className="text-4xl text-white font-bold">
+              <h1 data-aos={'zoom-in'} className="text-4xl text-white font-bold">
                 Browse Roommate Listings
               </h1>
-              <p className="text-white opacity-80 w-3/4 mx-auto">
+              <p data-aos={'fade-up'} className="text-white opacity-80 w-3/4 mx-auto">
                 Scroll through real roommate listings added by others. Use
                 filters to discover compatible roommates based on city, budget,
                 room type, and lifestyle choices.
               </p>
               <Link
+
                 to={"/browseListings"}
                 className="relative mt-3 inline-block px-4 py-2 font-medium group"
               >
@@ -99,15 +101,16 @@ const Hero = () => {
             }}
           >
             <div className="py-64 rounded-xl space-y-3 bg-gradient-to-t from-[#e2141410] via-[#0f0f0fa1] to-[#0f0f0fde]">
-              <h1 className="text-4xl text-white font-bold">
+              <h1 data-aos={'zoom-in'} className="text-4xl text-white font-bold">
                 Manage Your Listings
               </h1>
-              <p className="text-white opacity-80 w-3/4 mx-auto">
+              <p data-aos={'fade-up'} className="text-white opacity-80 w-3/4 mx-auto">
                 Access your own dashboard to view, edit, or remove your listings
                 anytime. Keep control over your roommate search and stay
                 organized in one place.
               </p>
               <Link
+                data-aos={'fade-up'}
                 to={"/myListings"}
                 className="relative mt-3 inline-block px-4 py-2 font-medium group"
               >
