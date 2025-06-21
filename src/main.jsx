@@ -10,6 +10,7 @@ import BrowseListing from './Pages/browselisting/BrowseListing';
 import AuthProvider from './Utility/AuthProvider';
 import { ToastContainer } from 'react-toastify';
 import Login from './Pages/login/Login';
+import Signup from './Pages/login/Signup';
 
 
 const router = createBrowserRouter([
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path:'/login',
         Component: Login
+      },
+      {
+        path:'/signup',
+        Component: Signup
       }
     ],
   },
