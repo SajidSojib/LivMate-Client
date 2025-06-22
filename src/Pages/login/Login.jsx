@@ -151,7 +151,7 @@ const Login = () => {
                 Don't have an account?{" "}
                 <Link
                   state={location?.state}
-                  to={"/register"}
+                  to={"/signup"}
                   className={"link link-hover text-sky-500"}
                 >
                   Register

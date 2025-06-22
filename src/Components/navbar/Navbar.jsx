@@ -8,9 +8,14 @@ import { MdGroupAdd } from "react-icons/md";
 import { FaListCheck } from "react-icons/fa6";
 import { RiMenuSearchFill } from "react-icons/ri";
 import { IoCloseSharp } from "react-icons/io5";
+import { AuthContext } from "../../Utility/AuthProvider";
+import { use } from "react";
+import { useNavigate } from "react-router";
 
 const Navbar = () => {
+  const {user, logOut} = use(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem("theme") || "dark";
   });
@@ -23,6 +28,14 @@ const Navbar = () => {
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
     console.log(theme);
+  };
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <div className="text-primary px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
@@ -115,32 +128,63 @@ const Navbar = () => {
           </li>
         </ul>
         <ul className="items-center hidden space-x-4 lg:flex">
-          <li>
-            <NavLink
-              to={`/signup`}
-              className="relative items-center justify-start inline-block px-5 py-3 overflow-hidden font-bold rounded-full group"
-            >
-              <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-primary opacity-[3%]"></span>
-              <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-primary opacity-100 group-hover:-translate-x-8"></span>
-              <span className="relative w-full text-left text-primary transition-colors duration-200 ease-in-out group-hover:text-neutral">
-                Sign Up
-              </span>
-              <span className="absolute inset-0 border-3 border-primary rounded-full"></span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={`/login`}
-              className="relative items-center justify-start inline-block px-5 py-3 overflow-hidden font-bold rounded-full group"
-            >
-              <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-primary opacity-[3%]"></span>
-              <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-primary opacity-100 group-hover:-translate-x-8"></span>
-              <span className="relative w-full text-left text-primary transition-colors duration-200 ease-in-out group-hover:text-neutral">
-                Login
-              </span>
-              <span className="absolute inset-0 border-3 border-primary rounded-full"></span>
-            </NavLink>
-          </li>
+          {user?.photoURL ? (
+            <>
+              <li
+                className="tooltip tooltip-left tooltip-primary"
+                data-tip={user?.displayName}
+              >
+                <img
+                  className="w-12 h-12 p-1 rounded-full ring-2 ring-primary cursor-pointer"
+                  src={user?.photoURL}
+                  alt=""
+                />
+              </li>
+              <li>
+                <button
+                  onClick={handleLogout}
+                  to={`/signup`}
+                  className="relative items-center justify-start inline-block px-5 py-3 overflow-hidden font-bold rounded-full group"
+                >
+                  <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-primary opacity-[3%]"></span>
+                  <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-primary opacity-100 group-hover:-translate-x-8"></span>
+                  <span className="relative w-full text-left text-primary transition-colors duration-200 ease-in-out group-hover:text-neutral">
+                    Log Out
+                  </span>
+                  <span className="absolute inset-0 border-3 border-primary rounded-full"></span>
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <NavLink
+                  to={`/signup`}
+                  className="relative items-center justify-start inline-block px-5 py-3 overflow-hidden font-bold rounded-full group"
+                >
+                  <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-primary opacity-[3%]"></span>
+                  <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-primary opacity-100 group-hover:-translate-x-8"></span>
+                  <span className="relative w-full text-left text-primary transition-colors duration-200 ease-in-out group-hover:text-neutral">
+                    Sign Up
+                  </span>
+                  <span className="absolute inset-0 border-3 border-primary rounded-full"></span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={`/login`}
+                  className="relative items-center justify-start inline-block px-5 py-3 overflow-hidden font-bold rounded-full group"
+                >
+                  <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-primary opacity-[3%]"></span>
+                  <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-primary opacity-100 group-hover:-translate-x-8"></span>
+                  <span className="relative w-full text-left text-primary transition-colors duration-200 ease-in-out group-hover:text-neutral">
+                    Login
+                  </span>
+                  <span className="absolute inset-0 border-3 border-primary rounded-full"></span>
+                </NavLink>
+              </li>
+            </>
+          )}
 
           <li>
             <label className="swap swap-rotate">
@@ -175,6 +219,18 @@ const Navbar = () => {
         </ul>
 
         <div className="lg:hidden">
+          {user?.photoURL && (
+            <p
+              className="tooltip tooltip-left tooltip-primary"
+              data-tip={user?.displayName}
+            >
+              <img
+                className="w-12 h-12 p-1 rounded-full ring-2 ring-primary cursor-pointer"
+                src={user?.photoURL}
+                alt=""
+              />
+            </p>
+          )}
           <button
             aria-label="Open Menu"
             title="Open Menu"
