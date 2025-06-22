@@ -1,14 +1,52 @@
 import React from "react";
 import { use } from "react";
 import { AuthContext } from "../../Utility/AuthProvider";
+import { useState } from "react";
+import Swal from "sweetalert2";
 
 const AddRoommate = () => {
   const {user} = use(AuthContext);
-  console.log(user);
+  const [checkboxChange, setCheckboxChange] = useState([]);
+
+  const handleCheckboxChange = (e) => {
+    const { value, checked } = e.target;
+    if (checked) {
+      setCheckboxChange([...checkboxChange, value]);
+    } else {
+      setCheckboxChange(checkboxChange.filter((item) => item !== value));
+    }
+  }
+  const handleSubmit=e=>{
+    e.preventDefault();
+    const formData=new FormData(e.target);
+    const newPost=Object.fromEntries(formData.entries());
+    newPost.lifestyle=checkboxChange;
+    console.log(newPost);
+
+    fetch("http://localhost:9000/posts", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newPost),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Roommate Added Successfully",
+            timer: 1500,
+          })
+        //   e.target.reset();
+        }
+      });
+  }
   return (
     <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
-      <form>
-        <div className="mt-14 card-body bg-base-100 w-full max-w-4xl mx-auto mb-24 shrink-0 shadow-primary shadow-2xl p-12 sm:transform sm:scale-105 rounded-3xl">
+      <form onSubmit={handleSubmit}>
+        <div className="mt-14 card-body bg-info w-full max-w-4xl mx-auto mb-24 shrink-0 shadow-primary shadow-2xl p-12 sm:transform sm:scale-105 rounded-3xl">
           <h1 className="text-4xl font-bold text-center text-primary">
             Post To Find Your Roommate
           </h1>
@@ -30,7 +68,7 @@ const AddRoommate = () => {
             <div className="flex flex-col gap-0.5">
               <label className="label text-primary">Location</label>
               <input
-                name="title"
+                name="location"
                 type="text"
                 className="input w-full input-primary"
                 placeholder="Location"
@@ -40,7 +78,7 @@ const AddRoommate = () => {
             <div className="flex flex-col gap-0.5">
               <label className="label text-primary">Rent</label>
               <input
-                name="title"
+                name="rent"
                 type="text"
                 className="input w-full input-primary"
                 placeholder="Rent per month($)"
@@ -49,6 +87,7 @@ const AddRoommate = () => {
 
             <div className="flex flex-col gap-0.5">
               <select
+                name="roomType"
                 defaultValue="Room Type"
                 className="select w-full select-primary"
               >
@@ -62,6 +101,7 @@ const AddRoommate = () => {
 
             <div className="flex flex-col gap-0.5">
               <select
+                name="availability"
                 defaultValue="Availability"
                 className="select w-full select-primary"
               >
@@ -82,7 +122,7 @@ const AddRoommate = () => {
                     name="lifestyle"
                     value="No Pets"
                     className="checkbox text-xl text-neutral checkbox-primary"
-                    // onChange={handleCheckboxChange}
+                    onChange={handleCheckboxChange}
                   />
                   <span className="text-base text-primary">No Pets</span>
                 </label>
@@ -92,7 +132,7 @@ const AddRoommate = () => {
                     name="lifestyle"
                     value="No Smoking"
                     className="checkbox text-xl text-neutral checkbox-primary"
-                    // onChange={handleCheckboxChange}
+                    onChange={handleCheckboxChange}
                   />
                   <span className="text-base text-primary">No Smoking</span>
                 </label>
@@ -102,7 +142,7 @@ const AddRoommate = () => {
                     name="lifestyle"
                     value="Night Owls"
                     className="checkbox text-xl text-neutral checkbox-primary"
-                    // onChange={handleCheckboxChange}
+                    onChange={handleCheckboxChange}
                   />
                   <span className="text-base text-primary">Night Owls</span>
                 </label>
@@ -112,7 +152,7 @@ const AddRoommate = () => {
                     name="lifestyle"
                     value="No Frequent Guests"
                     className="checkbox text-xl text-neutral checkbox-primary"
-                    // onChange={handleCheckboxChange}
+                    onChange={handleCheckboxChange}
                   />
                   <span className="text-base text-primary">
                     No Frequent Guests
@@ -124,7 +164,7 @@ const AddRoommate = () => {
             <div className="flex flex-col gap-0.5">
               <label className="label text-primary">Contact Info</label>
               <input
-                name="email"
+                name="contact"
                 type="text"
                 className="input w-full input-primary"
                 placeholder="Phone/Email"
@@ -134,6 +174,8 @@ const AddRoommate = () => {
             <div className="flex flex-col md:col-span-2 gap-0.5">
               <label className="label text-primary">Description</label>
               <textarea
+                name="description"
+                type="text"
                 placeholder="Add a description"
                 class="textarea textarea-primary w-full"
               ></textarea>
@@ -159,7 +201,7 @@ const AddRoommate = () => {
             </div>
 
             <button
-              class="md:col-span-2 mt-6 relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter border border-primary text-primary bg-neutral rounded-lg group"
+              class="md:col-span-2 mt-6 cursor-pointer relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter border border-primary text-primary bg-neutral rounded-lg group"
             >
               <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-primary rounded-full group-hover:w-full group-hover:h-60"></span>
               <span class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30"></span>

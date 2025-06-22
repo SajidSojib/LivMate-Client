@@ -10,6 +10,7 @@
   --color-accent: #a39989;
   --color-neutral: #f0dab7;
   --color-theme: #fff;
+  --color-info: #a3998980
 }
 @plugin "daisyui/theme" {
   name: "dark";
@@ -19,4 +20,5 @@
   --color-accent: #393E46;
   --color-neutral: #222831;
   --color-theme: #222831;
+  --color-info: #393E46
 }
