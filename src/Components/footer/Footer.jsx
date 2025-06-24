@@ -6,7 +6,10 @@ import { MdGroupAdd } from "react-icons/md";
 import { FaListCheck } from "react-icons/fa6";
 import { RiMenuSearchFill } from "react-icons/ri";
 import { IoCloseSharp } from "react-icons/io5";
+import { use } from "react";
+import { AuthContext } from "../../Utility/AuthProvider";
 const Footer = () => {
+  const {user} = use(AuthContext);
   return (
     <div className="px-4 pt-16 mx-auto text-primary sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
       <div className="grid gap-18 row-gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -94,7 +97,7 @@ const Footer = () => {
           </div>
           <div>
             <NavLink
-              to={`/mylistings`}
+              to={`/mylistings/${user?.email}`}
               aria-label="Our product"
               title="Our product"
               className={({ isActive }) =>

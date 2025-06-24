@@ -11,6 +11,7 @@ import AuthProvider from './Utility/AuthProvider';
 import { ToastContainer } from 'react-toastify';
 import Login from './Pages/login/Login';
 import Signup from './Pages/login/Signup';
+import MyListings from './Pages/mylistings/MyListings';
 
 
 const router = createBrowserRouter([
@@ -43,6 +44,16 @@ const router = createBrowserRouter([
       {
         path:'/signup',
         Component: Signup
+      },
+      {
+        path: '/mylistings/:email',
+        hydrateFallbackElement: (
+          <div className="flex items-center justify-center h-screen">
+            <span className="loading loading-dots loading-xl"></span>
+          </div>
+        ),
+        loader: ({params})=>fetch(`http://localhost:9000/posts/${params.email}`),
+        Component: MyListings
       }
     ],
   },

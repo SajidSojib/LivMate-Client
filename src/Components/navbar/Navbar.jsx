@@ -113,7 +113,7 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink
-              to={`/mylistings`}
+              to={`/mylistings/${user?.email}`}
               aria-label="Product pricing"
               title="Product pricing"
               className={({ isActive }) =>
@@ -343,7 +343,7 @@ const Navbar = () => {
                     </li>
                     <li>
                       <NavLink
-                        to={`/mylistings`}
+                        to={`/mylistings/${user?.email}`}
                         aria-label="Product pricing"
                         title="Product pricing"
                         className={({ isActive }) =>

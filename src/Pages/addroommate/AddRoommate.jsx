@@ -177,7 +177,7 @@ const AddRoommate = () => {
                 name="description"
                 type="text"
                 placeholder="Add a description"
-                class="textarea textarea-primary w-full"
+                className="textarea textarea-primary w-full"
               ></textarea>
             </div>
 
@@ -187,7 +187,8 @@ const AddRoommate = () => {
                 name="name"
                 type="text"
                 className="input w-full input-primary"
-                value={user?.displayName}
+                value ={user?.displayName}
+                readOnly
               />
             </div>
             <div className="flex flex-col gap-0.5">
@@ -197,15 +198,17 @@ const AddRoommate = () => {
                 type="email"
                 className="input w-full input-primary"
                 value={user?.email}
+                readOnly
               />
             </div>
 
             <button
-              class="md:col-span-2 mt-6 cursor-pointer relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter border border-primary text-primary bg-neutral rounded-lg group"
+              type="submit"
+              className="md:col-span-2 mt-6 cursor-pointer relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter border border-primary text-primary bg-neutral rounded-lg group"
             >
-              <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-primary rounded-full group-hover:w-full group-hover:h-60"></span>
-              <span class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30"></span>
-              <span class="relative group-hover:text-neutral text-base">Post Now</span>
+              <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-primary rounded-full group-hover:w-full group-hover:h-60"></span>
+              <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30"></span>
+              <span className="relative group-hover:text-neutral text-base">Post Now</span>
             </button>
           </fieldset>
         </div>
