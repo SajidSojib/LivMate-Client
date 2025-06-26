@@ -12,6 +12,7 @@ import { ToastContainer } from 'react-toastify';
 import Login from './Pages/login/Login';
 import Signup from './Pages/login/Signup';
 import MyListings from './Pages/mylistings/MyListings';
+import Details from './Pages/browselisting/Details';
 
 
 const router = createBrowserRouter([
@@ -44,12 +45,15 @@ const router = createBrowserRouter([
         Component: BrowseListing,
       },
       {
-        path: "/login",
-        Component: Login,
-      },
-      {
-        path: "/signup",
-        Component: Signup,
+        path: "/details/:id",
+        hydrateFallbackElement: (
+          <div className="flex items-center justify-center h-screen">
+            <span className="loading loading-dots loading-xl"></span>
+          </div>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:9000/post/${params.id}`),
+        Component: Details,
       },
       {
         path: "/mylistings/:email",
@@ -61,6 +65,14 @@ const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:9000/posts/${params.email}`),
         Component: MyListings,
+      },
+      {
+        path: "/login",
+        Component: Login,
+      },
+      {
+        path: "/signup",
+        Component: Signup,
       },
     ],
   },
