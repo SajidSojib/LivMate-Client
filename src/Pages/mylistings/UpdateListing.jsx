@@ -5,6 +5,7 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 
 const UpdateListing = ({post, posts, setPosts}) => {
+    console.log(post?.roomType);
   const {user} = use(AuthContext)
   const [checkboxChange, setCheckboxChange] = useState([]);
   console.log(post);
@@ -57,8 +58,8 @@ const UpdateListing = ({post, posts, setPosts}) => {
           Update Listing
         </h1>
         <div className="modal-action max-w-4xl">
-          <form method="dialog" className="w-full" onSubmit={handleSubmit}>
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+          <form className="w-full" onSubmit={handleSubmit}>
+            <button type="button" onClick={() => document.getElementById("my_modal_3").close()} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
               ✕
             </button>
             <fieldset className="fieldset space-y-3 grid gap-4 mb-4 md:grid-cols-2">
@@ -66,6 +67,7 @@ const UpdateListing = ({post, posts, setPosts}) => {
                 <label className="label text-primary">Title</label>
                 <input
                   name="title"
+                  defaultValue={post?.title}
                   type="text"
                   className="input input-primary w-full"
                   placeholder="Add a title"
@@ -76,6 +78,7 @@ const UpdateListing = ({post, posts, setPosts}) => {
                 <label className="label text-primary">Location</label>
                 <input
                   name="location"
+                  defaultValue={post?.location}
                   type="text"
                   className="input w-full input-primary"
                   placeholder="Location"
@@ -85,6 +88,7 @@ const UpdateListing = ({post, posts, setPosts}) => {
               <div className="flex flex-col gap-0.5">
                 <label className="label text-primary">Rent</label>
                 <input
+                  defaultValue={post?.rent}
                   name="rent"
                   type="text"
                   className="input w-full input-primary"
@@ -95,21 +99,21 @@ const UpdateListing = ({post, posts, setPosts}) => {
               <div className="flex flex-col gap-0.5">
                 <select
                   name="roomType"
-                  defaultValue="Room Type"
+                  defaultValue={post?.roomType || ''}
                   className="select w-full select-primary"
                 >
-                  <option disabled={true}>Room Type</option>
-                  <option>Single</option>
-                  <option>Shared</option>
-                  <option>Dorm</option>
-                  <option>Apartment</option>
+                  <option value={''} disabled={true}>Room Type</option>
+                  <option value={'Single'}>Single</option>
+                  <option value={'Shared'}>Shared</option>
+                  <option value={'Dorm'}>Dorm</option>
+                  <option value={'Apartment'}>Apartment</option>
                 </select>
               </div>
 
               <div className="flex flex-col gap-0.5">
                 <select
                   name="availability"
-                  defaultValue="Availability"
+                  defaultValue='Availability'
                   className="select w-full select-primary"
                 >
                   <option disabled={true}>Availability</option>
@@ -128,6 +132,7 @@ const UpdateListing = ({post, posts, setPosts}) => {
                       type="checkbox"
                       name="lifestyle"
                       value="No Pets"
+                      checked={checkboxChange.includes("No Pets")}
                       className="checkbox text-xl text-neutral checkbox-primary"
                       onChange={handleCheckboxChange}
                     />
@@ -136,6 +141,7 @@ const UpdateListing = ({post, posts, setPosts}) => {
                   <label className="label w-fit">
                     <input
                       type="checkbox"
+                      checked={checkboxChange.includes("No Smoking")}
                       name="lifestyle"
                       value="No Smoking"
                       className="checkbox text-xl text-neutral checkbox-primary"
@@ -148,6 +154,7 @@ const UpdateListing = ({post, posts, setPosts}) => {
                   <label className="label w-fit">
                     <input
                       type="checkbox"
+                      checked={checkboxChange.includes("Night Owls")}
                       name="lifestyle"
                       value="Night Owls"
                       className="checkbox text-xl text-neutral checkbox-primary"
@@ -160,6 +167,7 @@ const UpdateListing = ({post, posts, setPosts}) => {
                   <label className="label w-fit">
                     <input
                       type="checkbox"
+                      checked={checkboxChange.includes("No Frequent Guests")}
                       name="lifestyle"
                       value="No Frequent Guests"
                       className="checkbox text-xl text-neutral checkbox-primary"
@@ -176,6 +184,7 @@ const UpdateListing = ({post, posts, setPosts}) => {
                 <label className="label text-primary">Contact Info</label>
                 <input
                   name="contact"
+                  defaultValue={post?.contact}
                   type="text"
                   className="input w-full input-primary"
                   placeholder="Phone/Email"
@@ -186,6 +195,7 @@ const UpdateListing = ({post, posts, setPosts}) => {
                 <label className="label text-primary">Description</label>
                 <textarea
                   name="description"
+                  defaultValue={post?.description}
                   type="text"
                   placeholder="Add a description"
                   className="textarea textarea-primary w-full"

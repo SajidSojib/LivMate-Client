@@ -26,7 +26,7 @@ const router = createBrowserRouter([
             <span className="loading loading-dots loading-xl"></span>
           </div>
         ),
-        loader: ()=>fetch('/stats.json'),
+        loader: () => fetch("/stats.json"),
         Component: Home,
       },
       {
@@ -35,26 +35,33 @@ const router = createBrowserRouter([
       },
       {
         path: "browseListings",
-        Component: BrowseListing
-      },
-      {
-        path:'/login',
-        Component: Login
-      },
-      {
-        path:'/signup',
-        Component: Signup
-      },
-      {
-        path: '/mylistings/:email',
         hydrateFallbackElement: (
           <div className="flex items-center justify-center h-screen">
             <span className="loading loading-dots loading-xl"></span>
           </div>
         ),
-        loader: ({params})=>fetch(`http://localhost:9000/posts/${params.email}`),
-        Component: MyListings
-      }
+        loader: () => fetch("http://localhost:9000/posts"),
+        Component: BrowseListing,
+      },
+      {
+        path: "/login",
+        Component: Login,
+      },
+      {
+        path: "/signup",
+        Component: Signup,
+      },
+      {
+        path: "/mylistings/:email",
+        hydrateFallbackElement: (
+          <div className="flex items-center justify-center h-screen">
+            <span className="loading loading-dots loading-xl"></span>
+          </div>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:9000/posts/${params.email}`),
+        Component: MyListings,
+      },
     ],
   },
   {

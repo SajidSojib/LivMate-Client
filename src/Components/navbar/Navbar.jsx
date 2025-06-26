@@ -136,6 +136,7 @@ const Navbar = () => {
               >
                 <img
                   className="w-12 h-12 p-1 rounded-full ring-2 ring-primary cursor-pointer"
+                  referrerPolicy="no-referrer"
                   src={user?.photoURL}
                   alt=""
                 />
