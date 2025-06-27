@@ -11,9 +11,10 @@ import { IoCloseSharp } from "react-icons/io5";
 import { AuthContext } from "../../Utility/AuthProvider";
 import { use } from "react";
 import { useNavigate } from "react-router";
+import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
-  const {user, logOut} = use(AuthContext);
+  const { user, logOut } = use(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const [theme, setTheme] = useState(() => {
@@ -130,17 +131,13 @@ const Navbar = () => {
         <ul className="items-center hidden space-x-4 lg:flex">
           {user?.photoURL ? (
             <>
-              <li
-                className="tooltip tooltip-left tooltip-primary"
-                data-tip={user?.displayName}
-              >
-                <img
-                  className="w-12 h-12 p-1 rounded-full ring-2 ring-primary cursor-pointer"
-                  referrerPolicy="no-referrer"
-                  src={user?.photoURL}
-                  alt=""
-                />
-              </li>
+              <img
+                className=" my-tooltip w-12 h-12 p-1 rounded-full ring-2 ring-primary cursor-pointer"
+                referrerPolicy="no-referrer"
+                src={user?.photoURL}
+                alt=""
+              />
+
               <li>
                 <button
                   onClick={handleLogout}
@@ -187,6 +184,7 @@ const Navbar = () => {
             </>
           )}
 
+          {/* theme btn */}
           <li>
             <label className="swap swap-rotate">
               {/* this hidden checkbox controls the state */}
@@ -220,41 +218,68 @@ const Navbar = () => {
         </ul>
 
         <div className="lg:hidden">
-          {user?.photoURL && (
-            <p
-              className="tooltip tooltip-left tooltip-primary"
-              data-tip={user?.displayName}
-            >
+          <div className="flex gap-0.5 items-center">
+            <div>
+              <label className="swap swap-rotate">
+                {/* this hidden checkbox controls the state */}
+                <input
+                  onChange={toggleTheme}
+                  checked={theme === "dark" ? true : false}
+                  type="checkbox"
+                  className="theme-controller"
+                  value="synthwave"
+                />
+
+                {/* sun icon */}
+                <svg
+                  className={`swap-off h-10 w-10 fill-current`}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
+                </svg>
+
+                {/* moon icon */}
+                <svg
+                  className={`swap-on h-10 w-10 fill-current`}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
+                </svg>
+              </label>
+            </div>
+            {user?.photoURL && (
               <img
-                className="w-12 h-12 p-1 rounded-full ring-2 ring-primary cursor-pointer"
+                className="my-tooltip inline w-8 h-8 p-0.5 rounded-full ring-2 ring-primary cursor-pointer"
                 src={user?.photoURL}
                 alt=""
               />
-            </p>
-          )}
-          <button
-            aria-label="Open Menu"
-            title="Open Menu"
-            className="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline hover:bg-deep-purple-50 focus:bg-deep-purple-50"
-            onClick={() => setIsMenuOpen(true)}
-          >
-            <svg className="w-5 text-gray-600" viewBox="0 0 24 24">
-              <path
-                fill="currentColor"
-                d="M23,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,13,23,13z"
-              />
-              <path
-                fill="currentColor"
-                d="M23,6H1C0.4,6,0,5.6,0,5s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,6,23,6z"
-              />
-              <path
-                fill="currentColor"
-                d="M23,20H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,20,23,20z"
-              />
-            </svg>
-          </button>
+            )}
+            <button
+              aria-label="Open Menu"
+              title="Open Menu"
+              className="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline hover:bg-deep-purple-50 focus:bg-deep-purple-50"
+              onClick={() => setIsMenuOpen(true)}
+            >
+              <svg className="w-5 text-primary" viewBox="0 0 24 24">
+                <path
+                  fill="currentColor"
+                  d="M23,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,13,23,13z"
+                />
+                <path
+                  fill="currentColor"
+                  d="M23,6H1C0.4,6,0,5.6,0,5s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,6,23,6z"
+                />
+                <path
+                  fill="currentColor"
+                  d="M23,20H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,20,23,20z"
+                />
+              </svg>
+            </button>
+          </div>
           {isMenuOpen && (
-            <div className="absolute top-0 left-0 w-full">
+            <div className="absolute top-0 z-100 left-0 w-full">
               <div className="p-5 bg-primary text-neutral rounded shadow-sm">
                 <div className="flex items-center justify-between mb-4">
                   <div>
@@ -288,10 +313,10 @@ const Navbar = () => {
                     <button
                       aria-label="Close Menu"
                       title="Close Menu"
-                      className="p-2 -mt-2 -mr-2 transition duration-200 rounded hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                      className="p-2 -mt-2 -mr-2 transition duration-200 rounded text-neutral focus:outline-none focus:shadow-outline"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      <IoCloseSharp size={25} color="#f0dab7"></IoCloseSharp>
+                      <IoCloseSharp size={25} ></IoCloseSharp>
                     </button>
                   </div>
                 </div>
@@ -359,29 +384,46 @@ const Navbar = () => {
                     </li>
                     <li>
                       <div className="flex justify-around items-center">
-                        <NavLink
-                          to={`/signup`}
-                          className="relative items-center justify-start inline-block px-5 py-3 overflow-hidden font-bold rounded-full group"
-                        >
-                          <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-neutral opacity-[3%]"></span>
-                          <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-neutral opacity-100 group-hover:-translate-x-8"></span>
-                          <span className="relative w-full text-left text-neutral transition-colors duration-200 ease-in-out group-hover:text-primary">
-                            Sign Up
-                          </span>
-                          <span className="absolute inset-0 border-3 border-neutral rounded-full"></span>
-                        </NavLink>
+                        {user?.photoURL ? (
+                          <NavLink
+                            onClick={handleLogout}
+                            to={`/login`}
+                            className="relative items-center justify-start inline-block px-5 py-3 overflow-hidden font-bold rounded-full group"
+                          >
+                            <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-neutral opacity-[3%]"></span>
+                            <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-neutral opacity-100 group-hover:-translate-x-8"></span>
+                            <span className="relative w-full text-left text-neutral transition-colors duration-200 ease-in-out group-hover:text-primary">
+                              Sign Out
+                            </span>
+                            <span className="absolute inset-0 border-3 border-neutral rounded-full"></span>
+                          </NavLink>
+                        ) : (
+                          <>
+                            <NavLink
+                              to={`/signup`}
+                              className="relative items-center justify-start inline-block px-5 py-3 overflow-hidden font-bold rounded-full group"
+                            >
+                              <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-neutral opacity-[3%]"></span>
+                              <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-neutral opacity-100 group-hover:-translate-x-8"></span>
+                              <span className="relative w-full text-left text-neutral transition-colors duration-200 ease-in-out group-hover:text-primary">
+                                Sign Up
+                              </span>
+                              <span className="absolute inset-0 border-3 border-neutral rounded-full"></span>
+                            </NavLink>
 
-                        <NavLink
-                          to={`/login`}
-                          className="relative items-center justify-start inline-block px-5 py-3 overflow-hidden font-bold rounded-full group"
-                        >
-                          <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-neutral opacity-[3%]"></span>
-                          <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-neutral opacity-100 group-hover:-translate-x-8"></span>
-                          <span className="relative w-full text-left text-neutral transition-colors duration-200 ease-in-out group-hover:text-primary">
-                            Login
-                          </span>
-                          <span className="absolute inset-0 border-3 border-neutral rounded-full"></span>
-                        </NavLink>
+                            <NavLink
+                              to={`/login`}
+                              className="relative items-center justify-start inline-block px-5 py-3 overflow-hidden font-bold rounded-full group"
+                            >
+                              <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-neutral opacity-[3%]"></span>
+                              <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-neutral opacity-100 group-hover:-translate-x-8"></span>
+                              <span className="relative w-full text-left text-neutral transition-colors duration-200 ease-in-out group-hover:text-primary">
+                                Login
+                              </span>
+                              <span className="absolute inset-0 border-3 border-neutral rounded-full"></span>
+                            </NavLink>
+                          </>
+                        )}
                       </div>
                     </li>
                   </ul>
@@ -391,6 +433,11 @@ const Navbar = () => {
           )}
         </div>
       </div>
+      <Tooltip
+        anchorSelect=".my-tooltip"
+        content={user?.displayName}
+        place="bottom-end"
+      />
     </div>
   );
 };

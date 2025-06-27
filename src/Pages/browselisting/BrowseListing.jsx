@@ -8,6 +8,7 @@ import { BiSolidContact } from "react-icons/bi";
 import { useState } from "react";
 import { useEffect } from "react";
 import { BiLike } from "react-icons/bi";
+import { Fade } from "react-awesome-reveal";
 
 const BrowseListing = () => {
   const [search, setSearch] = useState("");
@@ -64,61 +65,64 @@ const BrowseListing = () => {
         />
       </label>
       <div className="grid md:grid-cols-2 xl:grid-cols-3 shadow-primary gap-10">
-        {posts.map((post, index) => (
-          <div
-            data-aos="fade-up"
-            data-aos-duration={(index + 1) * 500}
-            key={post._id}
-            className="transform h-fit duration-500 hover:scale-105 hover:shadow-xl shadow-primary"
-          >
-            <div className="card w-96 bg-info  shadow-xl">
-              <div className="card-body">
-                <h2 className="card-title font-bold">{post.title}</h2>
-                <p className="text-secondary">{post.description}</p>
+        <Fade cascade damping={0.2}>
+          {posts.map((post, index) => (
+            <div
+              data-aos-duration={(index + 1) * 500}
+              key={post._id}
+              className="transform h-fit duration-500 hover:scale-105 hover:shadow-xl shadow-primary"
+            >
+              <div className="card w-96 bg-info  shadow-xl">
+                <div className="card-body">
+                  <h2 className="card-title font-bold">{post.title}</h2>
+                  <p className="text-secondary">{post.description}</p>
 
-                <div className="flex items-center justify-between">
-                  <p className="flex items-center">
-                    <FaLocationDot />
-                    {post.location}
-                  </p>
-                  <p className={`flex text-white items-center justify-center`}>
-                    <span
-                      className={`${
-                        post.availability === "Available"
-                          ? "bg-green-700 p-1 px-1.5 rounded-xl"
-                          : "bg-red-700 p-1 px-1.5 rounded-xl"
-                      }`}
+                  <div className="flex items-center justify-between">
+                    <p className="flex items-center">
+                      <FaLocationDot />
+                      {post.location}
+                    </p>
+                    <p
+                      className={`flex text-white items-center justify-center`}
                     >
-                      {post.availability}
-                    </span>
-                  </p>
-                </div>
+                      <span
+                        className={`${
+                          post.availability === "Available"
+                            ? "bg-green-700 p-1 px-1.5 rounded-xl"
+                            : "bg-red-700 p-1 px-1.5 rounded-xl"
+                        }`}
+                      >
+                        {post.availability}
+                      </span>
+                    </p>
+                  </div>
 
-                <p className="flex items-center gap-0.5">
-                  <FaHome size={16} />
-                  {post.roomType}
-                </p>
-                <p className="flex items-center">
-                  <MdMonetizationOn size={17} />
-                  {post.rent}
-                </p>
-                {post?.likes && (
-                  <p className="flex gap-0.5 items-center">
-                    <BiLike size={17} />
-                    {post?.likes}
+                  <p className="flex items-center gap-0.5">
+                    <FaHome size={16} />
+                    {post.roomType}
                   </p>
-                )}
-                <div className="card-actions justify-end">
-                  <Link to={`/details/${post._id}`}>
-                    <button className="btn text-neutral btn-primary">
-                      See more
-                    </button>
-                  </Link>
+                  <p className="flex items-center">
+                    <MdMonetizationOn size={17} />
+                    {post.rent}
+                  </p>
+                  {post?.likes && (
+                    <p className="flex gap-0.5 items-center">
+                      <BiLike size={17} />
+                      {post?.likes}
+                    </p>
+                  )}
+                  <div className="card-actions justify-end">
+                    <Link to={`/details/${post._id}`}>
+                      <button className="btn text-neutral btn-primary">
+                        See more
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </Fade>
       </div>
     </div>
   );
