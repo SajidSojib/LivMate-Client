@@ -6,6 +6,8 @@ import { GrUpdate } from "react-icons/gr";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import UpdateListing from "./UpdateListing";
 import { useLoaderData } from "react-router";
+import { Link } from "react-router";
+
 const MyListings = () => {
   const initialPosts = useLoaderData();
 //   const { user } = use(AuthContext);
@@ -48,88 +50,116 @@ const MyListings = () => {
   };
 
   return (
-    <div className="mt-20 px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
-      <h1 className="text-4xl text-center font-bold text-primary">
-        My Roommate Listings
-      </h1>
-      <p className="mt-6 mb-14 w-3/4 mx-auto text-center text-secondary">
-        Manage all your roommate posts in one place. Update or delete your
-        listings easily and keep your profile up to date.
-      </p>
-
-      {/* table */}
-      <div className="mb-20 overflow-x-auto bg-info">
-        <table className="table">
-          {/* head */}
-          <thead>
-            <tr className="text-primary bg-info">
-              <th>Title</th>
-              <th>Location</th>
-              <th>Rent</th>
-              <th>Room Type</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* row 1 */}
-            {posts.map((post) => (
-              <tr key={post._id} className="">
-                <td>{post.title}</td>
-                <td>{post.location}</td>
-                <td>{post.rent}</td>
-                <td>{post.roomType}</td>
-                <td className="flex gap-2">
-                  <button
-                    onClick={() => handleUpdateClick(post)}
-                    className="relative inline-block group"
-                  >
-                    <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-primary transition-colors duration-300 ease-out border-2 border-primary rounded-lg group-hover:text-neutral">
-                      <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-neutral"></span>
-                      <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-primary group-hover:-rotate-180 ease"></span>
-                      <span className="relative flex items-center gap-1">
-                        <GrUpdate size={16} />
-                        Update
-                      </span>
-                    </span>
-                    <span
-                      className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-primary rounded-lg group-hover:mb-0 group-hover:mr-0"
-                      data-rounded="rounded-lg"
-                    ></span>
-                  </button>
-
-                  <button
-                    onClick={() => handleDelete(post._id)}
-                    className="relative inline-block group"
-                  >
-                    <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-neutral transition-colors duration-300 ease-out border-2 border-neutral rounded-lg group-hover:text-primary">
-                      <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-primary "></span>
-                      <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-neutral group-hover:-rotate-180 ease "></span>
-                      <span className="relative flex items-center gap-1">
-                        <RiDeleteBin6Fill size={20} />
-                        Delete
-                      </span>
-                    </span>
-                    <span
-                      className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 border-primary ease-linear bg-neutral rounded-lg group-hover:mb-0 group-hover:mr-0"
-                      data-rounded="rounded-lg"
-                    ></span>
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <dialog id="my_modal_3" className="modal">
-          <div className="modal-box p-0 max-w-5xl">
-            <UpdateListing
-              post={updatePost}
-              posts={posts}
-              setPosts={setPosts}
-            ></UpdateListing>
+    <>
+      {posts.length === 0 ? (
+        <div className="mt-20 px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+          <h1 className="text-4xl text-center font-bold text-primary">
+            My Roommate Listings
+          </h1>
+          <p className="mt-6 mb-14 w-3/4 mx-auto text-center text-secondary">
+            Manage all your roommate posts in one place. Update or delete your
+            listings easily and keep your profile up to date.
+          </p>
+          <div className="flex space-y-3 flex-col items-center justify-center py-24 bg-info rounded-2xl">
+            <h1 className="text-2xl w-5/6 mx-auto text-center font-bold text-primary">
+              No Roommate Listings Found
+            </h1>
+            <p className="w-5/6 mx-auto text-center text-secondary">
+              You have no Roommate Listings. Please add a roommate listing by
+              clicking the button below
+            </p>
+            <Link to="/addroommate">
+              <button className="btn btn-primary mt-4">
+                Add Roommate Listing
+              </button>
+            </Link>
           </div>
-        </dialog>
-      </div>
-    </div>
+        </div>
+      ) : (
+        <div className="mt-20 px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+          <h1 className="text-4xl text-center font-bold text-primary">
+            My Roommate Listings
+          </h1>
+          <p className="mt-6 mb-14 w-3/4 mx-auto text-center text-secondary">
+            Manage all your roommate posts in one place. Update or delete your
+            listings easily and keep your profile up to date.
+          </p>
+
+          {/* table */}
+          <div className="mb-20 overflow-x-auto bg-info">
+            <table className="table">
+              {/* head */}
+              <thead>
+                <tr className="text-primary bg-info">
+                  <th>Title</th>
+                  <th>Location</th>
+                  <th>Rent</th>
+                  <th>Room Type</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* row 1 */}
+                {posts.map((post) => (
+                  <tr key={post._id} className="">
+                    <td>{post.title}</td>
+                    <td>{post.location}</td>
+                    <td>${post.rent}</td>
+                    <td>{post.roomType}</td>
+                    <td className="flex gap-2">
+                      <button
+                        onClick={() => handleUpdateClick(post)}
+                        className="relative inline-block group"
+                      >
+                        <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-primary transition-colors duration-300 ease-out border-2 border-primary rounded-lg group-hover:text-neutral">
+                          <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-neutral"></span>
+                          <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-primary group-hover:-rotate-180 ease"></span>
+                          <span className="relative flex items-center gap-1">
+                            <GrUpdate size={16} />
+                            Update
+                          </span>
+                        </span>
+                        <span
+                          className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-primary rounded-lg group-hover:mb-0 group-hover:mr-0"
+                          data-rounded="rounded-lg"
+                        ></span>
+                      </button>
+
+                      <button
+                        onClick={() => handleDelete(post._id)}
+                        className="relative inline-block group"
+                      >
+                        <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-neutral transition-colors duration-300 ease-out border-2 border-neutral rounded-lg group-hover:text-primary">
+                          <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-primary "></span>
+                          <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-neutral group-hover:-rotate-180 ease "></span>
+                          <span className="relative flex items-center gap-1">
+                            <RiDeleteBin6Fill size={20} />
+                            Delete
+                          </span>
+                        </span>
+                        <span
+                          className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 border-primary ease-linear bg-neutral rounded-lg group-hover:mb-0 group-hover:mr-0"
+                          data-rounded="rounded-lg"
+                        ></span>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <dialog id="my_modal_3" className="modal">
+              <div className="modal-box p-0 max-w-5xl">
+                <UpdateListing
+                  post={updatePost}
+                  posts={posts}
+                  setPosts={setPosts}
+                ></UpdateListing>
+              </div>
+            </dialog>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -5,10 +5,8 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 
 const UpdateListing = ({post, posts, setPosts}) => {
-    console.log(post?.roomType);
   const {user} = use(AuthContext)
   const [checkboxChange, setCheckboxChange] = useState([]);
-  console.log(post);
 
   const handleCheckboxChange = (e) => {
     const { value, checked } = e.target;

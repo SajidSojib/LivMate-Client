@@ -146,7 +146,7 @@ const AddRoommate = () => {
                   />
                   <span className="text-base text-primary">Night Owls</span>
                 </label>
-                <label className="label w-fit">
+                <label className="label text-wrap w-fit">
                   <input
                     type="checkbox"
                     name="lifestyle"

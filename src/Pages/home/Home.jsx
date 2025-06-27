@@ -10,7 +10,6 @@ import Feature from '../../Components/hero/Feature';
 
 const Home = () => {
     const posts = useLoaderData();
-    console.log(posts);
     const [data, setData] = useState();
     useEffect(() => {
       fetch("/stats.json")

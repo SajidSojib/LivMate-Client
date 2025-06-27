@@ -46,7 +46,7 @@ const Details = () => {
         <Lottie animationData={postAnimation} loop={true} />
       </div>
 
-      <div data-aos="fade-right" className="flex flex-col max-w-lg shadow-primary p-6 space-y-6 overflow-hidden rounded-lg shadow-lg bg-info text-primary">
+      <div data-aos="fade-right" className="flex flex-col max-w-lg shadow-primary p-6 space-y-6 min-w-xs overflow-hidden rounded-lg shadow-lg bg-info text-primary">
         {/* header */}
         <div className="flex justify-between items-center">
           <div className="flex space-x-4">
