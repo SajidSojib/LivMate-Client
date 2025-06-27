@@ -26,11 +26,11 @@ const Stats = ({ data }) => {
         roommates, and build better shared living experiences every day.
       </p>
       <div className="grid gap-10 row-gap-8 lg:grid-cols-3">
-        {data.map((d) => (
-          <div key={d.id} data-aos="fade-up">
+        {data?.map((d) => (
+          <div key={d?.id} data-aos="fade-up">
             <div className="flex">
               <CountUp
-                key={d.id}
+                key={d?.id}
                 start={0}
                 end={d?.stat}
                 duration={3}
@@ -45,11 +45,11 @@ const Stats = ({ data }) => {
                 )}
               </CountUp>
               <div className="flex items-center justify-center rounded-full bg-teal-accent-400 w-7 text-3xl h-7">
-                {d.icon}
+                {d?.icon}
               </div>
             </div>
-            <p className="mb-2 font-bold md:text-lg text-primary">{d.label}</p>
-            <p className="text-secondary">{d.subtitle}</p>
+            <p className="mb-2 font-bold md:text-lg text-primary">{d?.label}</p>
+            <p className="text-secondary">{d?.subtitle}</p>
           </div>
         ))}
       </div>

@@ -1,69 +1,20 @@
 import React from "react";
-import { useLoaderData } from "react-router";
+import { Fade } from "react-awesome-reveal";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaHome } from "react-icons/fa";
 import { MdMonetizationOn } from "react-icons/md";
-import { Link } from "react-router";
-import { BiSolidContact } from "react-icons/bi";
-import { useState } from "react";
-import { useEffect } from "react";
 import { BiLike } from "react-icons/bi";
-import { Fade } from "react-awesome-reveal";
-
-const BrowseListing = () => {
-  const [search, setSearch] = useState("");
-  const [posts, setPosts] = useState(useLoaderData());
-
-  useEffect(() => {
-    fetch(`http://localhost:9000/posts?searchParams=${search}`)
-      .then((res) => res.json())
-      .then((data) => setPosts(data));
-  }, [search]);
-
-  console.log(posts);
+import { Link } from "react-router";
+const Feature = ({ posts }) => {
   return (
     <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-      <h1
-        data-aos="zoom-in"
-        className="text-4xl font-bold text-center text-primary"
-      >
-        Find Your Perfect Roommate Match
+      <h1 className="text-4xl font-bold text-center text-primary">
+        Featured Roommates Post
       </h1>
-      <p
-        data-aos="zoom-in"
-        className="text-center w-3/4 mx-auto text-secondary mt-6 mb-14"
-      >
-        Explore available listings tailored to your lifestyle, preferences, and
-        budget. Filter by location, room type, and more to find the right fit
-        for you.
+      <p className="text-center w-3/4 mx-auto text-secondary mt-6 mb-14">
+        Handpicked rooms and spaces tailored to popular preferences — explore
+        top-rated options loved by our community.
       </p>
-      {/* search */}
-      <label
-        data-aos="fade-up"
-        className="input w-3/4 mx-auto flex items-center mb-6"
-      >
-        <svg
-          className="h-[1em] opacity-50"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-        >
-          <g
-            strokeLinejoin="round"
-            strokeLinecap="round"
-            strokeWidth="2.5"
-            fill="none"
-            stroke="currentColor"
-          >
-            <circle cx="11" cy="11" r="8"></circle>
-            <path d="m21 21-4.3-4.3"></path>
-          </g>
-        </svg>
-        <input
-          onChange={(e) => setSearch(e.target.value)}
-          type="search"
-          placeholder="Search"
-        />
-      </label>
       <div className="grid md:grid-cols-2 xl:grid-cols-3 shadow-primary gap-10">
         <Fade cascade damping={0.2}>
           {posts.map((post, index) => (
@@ -124,8 +75,15 @@ const BrowseListing = () => {
           ))}
         </Fade>
       </div>
+      <div data-aos="fade-up" className="text-center mt-10">
+        <Link to={"/browseListings"}>
+          <button className="btn btn-wide btn-primary text-neutral">
+            See More Posts
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };
 
-export default BrowseListing;
+export default Feature;

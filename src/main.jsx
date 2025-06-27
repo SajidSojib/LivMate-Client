@@ -13,6 +13,7 @@ import Login from './Pages/login/Login';
 import Signup from './Pages/login/Signup';
 import MyListings from './Pages/mylistings/MyListings';
 import Details from './Pages/browselisting/Details';
+import Private from './Pages/Private';
 
 
 const router = createBrowserRouter([
@@ -27,22 +28,22 @@ const router = createBrowserRouter([
             <span className="loading loading-dots loading-xl"></span>
           </div>
         ),
-        loader: () => fetch("/stats.json"),
+        loader: () => fetch("http://localhost:9000/availablePosts"),
         Component: Home,
       },
       {
         path: "/addroommate",
-        Component: AddRoommate,
+        element: <Private><AddRoommate></AddRoommate></Private>
       },
       {
-        path: "browseListings",
+        path: "/browseListings",
         hydrateFallbackElement: (
           <div className="flex items-center justify-center h-screen">
             <span className="loading loading-dots loading-xl"></span>
           </div>
         ),
         loader: () => fetch("http://localhost:9000/posts"),
-        Component: BrowseListing,
+        element: <Private><BrowseListing></BrowseListing></Private>
       },
       {
         path: "/details/:id",
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:9000/post/${params.id}`),
-        Component: Details,
+        element: <Private><Details></Details></Private>
       },
       {
         path: "/mylistings/:email",
@@ -64,7 +65,7 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:9000/posts/${params.email}`),
-        Component: MyListings,
+        element: <Private><MyListings></MyListings></Private>
       },
       {
         path: "/login",

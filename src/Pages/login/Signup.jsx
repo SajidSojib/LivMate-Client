@@ -9,7 +9,8 @@ import { Link, useLocation, useNavigate } from 'react-router';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { IoLogInSharp } from "react-icons/io5";
 import { updateProfile } from "firebase/auth";
-
+import signupAnimation from "../../assets/signupAnimation.json";
+import Lottie from "lottie-react";
 
 const Signup = () => {
     const { createUser, setUser, setLoading, googleSignIn } = use(AuthContext);
@@ -42,7 +43,6 @@ const Signup = () => {
                   confirmButtonText: "Ok",
                 });
                 navigate(location?.state || "/");
-                // window.location.reload();
               });
             });
           })
@@ -80,9 +80,13 @@ const Signup = () => {
     return (
       <div
         data-aos="zoom-in-up"
-        className="py-28 min-h-[calc(100vh-250px)] flex items-center justify-center"
+        className="py-28 min-h-[calc(100vh-250px)] flex items-center justify-center flex-col md:flex-row"
       >
+        <div data-aos="fade-left" className='max-w-md xl:max-w-xl'>
+          <Lottie animationData={signupAnimation} loop={true} />
+        </div>
         <form
+          data-aos="fade-right"
           onSubmit={handleSubmit}
           className="card bg-base-100 w-full max-w-sm shrink-0 shadow-primary shadow-2xl p-8 sm:transform sm:scale-105 rounded-3xl"
         >
@@ -112,6 +116,7 @@ const Signup = () => {
                 type="text"
                 className="input"
                 placeholder="Photo URL"
+                required
               />
 
               <label className="label mt-3 text-primary">Password</label>
@@ -121,6 +126,7 @@ const Signup = () => {
                   type={showPassword ? "text" : "password"}
                   className="input z-0"
                   placeholder="Password"
+                  required
                 />
                 <button
                   type="button"
