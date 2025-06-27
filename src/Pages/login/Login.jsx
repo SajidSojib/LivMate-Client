@@ -25,7 +25,7 @@ const Login = () => {
     signInUser(email, password)
       .then(() => {
         Swal.fire({
-          title: "User Created Successfully",
+          title: "Login Successfully",
           text: "You are loged in now",
           icon: "success",
           confirmButtonText: "Ok",
@@ -45,7 +45,7 @@ const Login = () => {
     googleSignIn()
       .then(() => {
         Swal.fire({
-          title: "User Created Successfully",
+          title: "Login Successfully",
           text: "You are loged in now",
           icon: "success",
           confirmButtonText: "Ok",

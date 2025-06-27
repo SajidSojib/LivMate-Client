@@ -12,6 +12,7 @@ import { AuthContext } from "../../Utility/AuthProvider";
 import { use } from "react";
 import { useNavigate } from "react-router";
 import { Tooltip } from "react-tooltip";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
@@ -32,11 +33,29 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    logOut()
-      .then(() => {
-        navigate("/");
-      })
-      .catch((err) => console.log(err));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You really want to logout!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Logout!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logOut()
+          .then(() => {
+            navigate("/");
+          })
+          .catch((err) => console.log(err));
+        Swal.fire({
+          title: "Logged out!",
+          text: "Your are logged out successfully.",
+          icon: "success",
+        });
+      }
+    });
+    
   };
   return (
     <div className="text-primary px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
