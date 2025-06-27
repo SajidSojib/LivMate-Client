@@ -10,34 +10,34 @@ import { BiLike } from "react-icons/bi";
 import { toast } from "react-toastify";
 import { use } from "react";
 import { AuthContext } from "../../Utility/AuthProvider";
-import postAnimation from '../../assets/postAnimation.json';
+import postAnimation from "../../assets/postAnimation.json";
 import Lottie from "lottie-react";
 import { Helmet } from "react-helmet";
 
 const Details = () => {
-  const {user} = use(AuthContext);
+  const { user } = use(AuthContext);
   const [post, setPost] = useState(useLoaderData());
   const [toggle, setToggle] = useState(false);
 
   const handleLike = () => {
-    if(user.email===post.email){
+    if (user.email === post.email) {
       toast.error("You can't like your own post");
-    }else{
-        fetch(`http://localhost:9000/posts/${post._id}`, {
-          method: "PATCH",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({ likes: post?.likes }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.modifiedCount) {
-              setPost({ ...post, likes: (post?.likes || 0) + 1 });
-              toggle || toast.success("Liked Successfully!");
-            }
-          });
-        setToggle(!toggle);
+    } else {
+      fetch(`https://livmate-server.vercel.app/posts/${post._id}`, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ likes: post?.likes }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.modifiedCount) {
+            setPost({ ...post, likes: (post?.likes || 0) + 1 });
+            toggle || toast.success("Liked Successfully!");
+          }
+        });
+      setToggle(!toggle);
     }
   };
 

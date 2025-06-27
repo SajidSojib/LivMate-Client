@@ -7,10 +7,10 @@ import { RiDeleteBin6Fill } from "react-icons/ri";
 import UpdateListing from "./UpdateListing";
 import { useLoaderData } from "react-router";
 import { Link } from "react-router";
-
+import { Helmet } from "react-helmet";
 const MyListings = () => {
   const initialPosts = useLoaderData();
-//   const { user } = use(AuthContext);
+  //   const { user } = use(AuthContext);
   const [posts, setPosts] = useState(initialPosts);
   const [updatePost, setUpdatePost] = useState(null);
 
@@ -30,7 +30,7 @@ const MyListings = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:9000/posts/${id}`, {
+        fetch(`https://livmate-server.vercel.app/posts/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
-import { useNavigation } from 'react-router';
+import { useNavigation } from "react-router";
 import Lottie from "lottie-react";
 import errorAni from "../assets/errorAni.json";
 import { Helmet } from "react-helmet";

@@ -4,8 +4,8 @@ import { AuthContext } from "../../Utility/AuthProvider";
 import { useState } from "react";
 import Swal from "sweetalert2";
 
-const UpdateListing = ({post, posts, setPosts}) => {
-  const {user} = use(AuthContext)
+const UpdateListing = ({ post, posts, setPosts }) => {
+  const { user } = use(AuthContext);
   const [checkboxChange, setCheckboxChange] = useState([]);
 
   const handleCheckboxChange = (e) => {
@@ -15,15 +15,15 @@ const UpdateListing = ({post, posts, setPosts}) => {
     } else {
       setCheckboxChange(checkboxChange.filter((item) => item !== value));
     }
-  }
+  };
 
-  const handleSubmit=e=>{
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const formData=new FormData(e.target);
-    const newPost=Object.fromEntries(formData.entries());
-    newPost.lifestyle=checkboxChange;
+    const formData = new FormData(e.target);
+    const newPost = Object.fromEntries(formData.entries());
+    newPost.lifestyle = checkboxChange;
 
-    fetch(`http://localhost:9000/posts/${post._id}`, {
+    fetch(`https://livmate-server.vercel.app/posts/${post._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -32,23 +32,24 @@ const UpdateListing = ({post, posts, setPosts}) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        newPost._id=post._id
+        newPost._id = post._id;
         if (data.modifiedCount) {
-            setPosts(posts.map((p) => p._id === post._id ? newPost : p))
-            Swal.fire({
-              title: "Listing Updated Successfully",
-              text: "Your listing has been updated",
-              icon: "success",
-              timer: 1500,
-              confirmButtonText: "Ok",
-            })        }
+          setPosts(posts.map((p) => (p._id === post._id ? newPost : p)));
+          Swal.fire({
+            title: "Listing Updated Successfully",
+            text: "Your listing has been updated",
+            icon: "success",
+            timer: 1500,
+            confirmButtonText: "Ok",
+          });
+        }
         e.target.reset();
       });
     const modal = document.getElementById("my_modal_3");
-    if(modal) {
-      modal.close()
+    if (modal) {
+      modal.close();
     }
-  }
+  };
   return (
     <div className="max-w-5xl bg-info">
       <div className="max-w-4xl p-6 mx-auto">
@@ -57,7 +58,11 @@ const UpdateListing = ({post, posts, setPosts}) => {
         </h1>
         <div className="modal-action max-w-4xl">
           <form className="w-full" onSubmit={handleSubmit}>
-            <button type="button" onClick={() => document.getElementById("my_modal_3").close()} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+            <button
+              type="button"
+              onClick={() => document.getElementById("my_modal_3").close()}
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            >
               ✕
             </button>
             <fieldset className="fieldset space-y-3 grid gap-4 mb-4 md:grid-cols-2">
@@ -97,21 +102,23 @@ const UpdateListing = ({post, posts, setPosts}) => {
               <div className="flex flex-col gap-0.5">
                 <select
                   name="roomType"
-                  defaultValue={post?.roomType || ''}
+                  defaultValue={post?.roomType || ""}
                   className="select w-full select-primary"
                 >
-                  <option value={''} disabled={true}>Room Type</option>
-                  <option value={'Single'}>Single</option>
-                  <option value={'Shared'}>Shared</option>
-                  <option value={'Dorm'}>Dorm</option>
-                  <option value={'Apartment'}>Apartment</option>
+                  <option value={""} disabled={true}>
+                    Room Type
+                  </option>
+                  <option value={"Single"}>Single</option>
+                  <option value={"Shared"}>Shared</option>
+                  <option value={"Dorm"}>Dorm</option>
+                  <option value={"Apartment"}>Apartment</option>
                 </select>
               </div>
 
               <div className="flex flex-col gap-0.5">
                 <select
                   name="availability"
-                  defaultValue='Availability'
+                  defaultValue="Availability"
                   className="select w-full select-primary"
                 >
                   <option disabled={true}>Availability</option>

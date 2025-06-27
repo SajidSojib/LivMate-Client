@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 
 const AddRoommate = () => {
-  const {user} = use(AuthContext);
+  const { user } = use(AuthContext);
   const [checkboxChange, setCheckboxChange] = useState([]);
 
   const handleCheckboxChange = (e) => {
@@ -16,15 +16,15 @@ const AddRoommate = () => {
     } else {
       setCheckboxChange(checkboxChange.filter((item) => item !== value));
     }
-  }
-  const handleSubmit=e=>{
+  };
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const formData=new FormData(e.target);
-    const newPost=Object.fromEntries(formData.entries());
-    newPost.lifestyle=checkboxChange;
+    const formData = new FormData(e.target);
+    const newPost = Object.fromEntries(formData.entries());
+    newPost.lifestyle = checkboxChange;
     console.log(newPost);
 
-    fetch("http://localhost:9000/posts", {
+    fetch("https://livmate-server.vercel.app/posts", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -39,14 +39,16 @@ const AddRoommate = () => {
             icon: "success",
             title: "Roommate Added Successfully",
             timer: 1500,
-          })
+          });
           e.target.reset();
         }
       });
-  }
+  };
   return (
     <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
-      <Helmet><title>Add Roommates | LivMate</title></Helmet>
+      <Helmet>
+        <title>Add Roommates | LivMate</title>
+      </Helmet>
       <form onSubmit={handleSubmit}>
         <div className="mt-14 card-body bg-info w-full max-w-4xl mx-auto mb-24 shrink-0 shadow-primary shadow-2xl p-12 sm:transform sm:scale-105 rounded-3xl">
           <h1 className="text-4xl font-bold text-center text-primary">
@@ -194,7 +196,7 @@ const AddRoommate = () => {
                 name="name"
                 type="text"
                 className="input w-full input-primary"
-                value ={user?.displayName}
+                value={user?.displayName}
                 readOnly
               />
             </div>
@@ -215,7 +217,9 @@ const AddRoommate = () => {
             >
               <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-primary rounded-full group-hover:w-full group-hover:h-60"></span>
               <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30"></span>
-              <span className="relative group-hover:text-neutral text-base">Post Now</span>
+              <span className="relative group-hover:text-neutral text-base">
+                Post Now
+              </span>
             </button>
           </fieldset>
         </div>

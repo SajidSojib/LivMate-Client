@@ -6,7 +6,11 @@ import { Suspense } from 'react';
 import { useEffect } from 'react';
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useNavigation } from 'react-router';
+
 const MainLayout = () => {
+  const navi=useNavigation();
+  const isLoading=navi.state==='loading';
   useEffect(() => {
     AOS.init({ duration: 1000, anchorPlacement: "top-center" });
   }, []);
@@ -17,17 +21,15 @@ const MainLayout = () => {
           <Navbar></Navbar>
         </div>
 
-        <Suspense
-          fallback={
-            <div className="flex items-center justify-center h-screen">
-              <span className="loading loading-spinner loading-xl"></span>
-            </div>
-          }
-        >
+        {isLoading ? (
+          <div className="flex items-center justify-center h-screen">
+            <span className="loading loading-spinner loading-xl"></span>
+          </div>
+        ) : (
           <div className="poppins-regular min-h-[calc(100vh-463px)]">
             <Outlet></Outlet>
           </div>
-        </Suspense>
+        )}
 
         <div className="poppins-regular bg-neutral">
           <Footer></Footer>

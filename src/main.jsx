@@ -1,20 +1,19 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router";
-import MainLayout from './Layouts/MainLayout';
-import Home from './Pages/home/Home';
-import AddRoommate from './Pages/addroommate/AddRoommate';
-import Error from './Pages/Error';
-import BrowseListing from './Pages/browselisting/BrowseListing';
-import AuthProvider from './Utility/AuthProvider';
-import { ToastContainer } from 'react-toastify';
-import Login from './Pages/login/Login';
-import Signup from './Pages/login/Signup';
-import MyListings from './Pages/mylistings/MyListings';
-import Details from './Pages/browselisting/Details';
-import Private from './Pages/Private';
-
+import MainLayout from "./Layouts/MainLayout";
+import Home from "./Pages/home/Home";
+import AddRoommate from "./Pages/addroommate/AddRoommate";
+import Error from "./Pages/Error";
+import BrowseListing from "./Pages/browselisting/BrowseListing";
+import AuthProvider from "./Utility/AuthProvider";
+import { ToastContainer } from "react-toastify";
+import Login from "./Pages/login/Login";
+import Signup from "./Pages/login/Signup";
+import MyListings from "./Pages/mylistings/MyListings";
+import Details from "./Pages/browselisting/Details";
+import Private from "./Pages/Private";
 
 const router = createBrowserRouter([
   {
@@ -28,12 +27,16 @@ const router = createBrowserRouter([
             <span className="loading loading-dots loading-xl"></span>
           </div>
         ),
-        loader: () => fetch("http://localhost:9000/availablePosts"),
+        loader: () => fetch("https://livmate-server.vercel.app/availablePosts"),
         Component: Home,
       },
       {
         path: "/addroommate",
-        element: <Private><AddRoommate></AddRoommate></Private>
+        element: (
+          <Private>
+            <AddRoommate></AddRoommate>
+          </Private>
+        ),
       },
       {
         path: "/browseListings",
@@ -42,8 +45,8 @@ const router = createBrowserRouter([
             <span className="loading loading-dots loading-xl"></span>
           </div>
         ),
-        loader: () => fetch("http://localhost:9000/posts"),
-        element: <BrowseListing></BrowseListing>
+        loader: () => fetch("https://livmate-server.vercel.app/posts"),
+        element: <BrowseListing></BrowseListing>,
       },
       {
         path: "/details/:id",
@@ -53,8 +56,12 @@ const router = createBrowserRouter([
           </div>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:9000/post/${params.id}`),
-        element: <Private><Details></Details></Private>
+          fetch(`https://livmate-server.vercel.app/post/${params.id}`),
+        element: (
+          <Private>
+            <Details></Details>
+          </Private>
+        ),
       },
       {
         path: "/mylistings/:email",
@@ -64,8 +71,12 @@ const router = createBrowserRouter([
           </div>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:9000/posts/${params.email}`),
-        element: <Private><MyListings></MyListings></Private>
+          fetch(`https://livmate-server.vercel.app/posts/${params.email}`),
+        element: (
+          <Private>
+            <MyListings></MyListings>
+          </Private>
+        ),
       },
       {
         path: "/login",
