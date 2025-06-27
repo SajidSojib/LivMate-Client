@@ -51,6 +51,10 @@ const MyListings = () => {
 
   return (
     <>
+      <Helmet>
+        <title>My Listings | LivMate</title>
+      </Helmet>
+
       {posts.length === 0 ? (
         <div className="mt-20 px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
           <h1 className="text-4xl text-center font-bold text-primary">

@@ -43,7 +43,7 @@ const router = createBrowserRouter([
           </div>
         ),
         loader: () => fetch("http://localhost:9000/posts"),
-        element: <Private><BrowseListing></BrowseListing></Private>
+        element: <BrowseListing></BrowseListing>
       },
       {
         path: "/details/:id",

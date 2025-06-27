@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useNavigation } from 'react-router';
 import Feature from '../../Components/hero/Feature';
+import { Helmet } from 'react-helmet';
 
 const Home = () => {
     const posts = useLoaderData();
@@ -31,12 +32,15 @@ const Home = () => {
       </div>
     );
     return (
-        <div>
-           <Hero></Hero>
-           <Feature posts={posts}></Feature>
-           <Faq questions={questions}></Faq>
-           <Stats data={data}></Stats> 
-        </div>
+      <div>
+        <Helmet>
+          <title>LivMate</title>
+        </Helmet>
+        <Hero></Hero>
+        <Feature posts={posts}></Feature>
+        <Faq questions={questions}></Faq>
+        <Stats data={data}></Stats>
+      </div>
     );
 };
 

@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { BiLike } from "react-icons/bi";
 import { Fade } from "react-awesome-reveal";
+import { Helmet } from "react-helmet";
 
 const BrowseListing = () => {
   const [search, setSearch] = useState("");
@@ -22,6 +23,10 @@ const BrowseListing = () => {
 
   return (
     <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+      <Helmet>
+        <title>Browse Listings | LivMate</title>
+      </Helmet>
+
       <h1
         data-aos="zoom-in"
         className="text-4xl font-bold text-center text-primary"

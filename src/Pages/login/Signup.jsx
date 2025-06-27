@@ -11,6 +11,7 @@ import { IoLogInSharp } from "react-icons/io5";
 import { updateProfile } from "firebase/auth";
 import signupAnimation from "../../assets/signupAnimation.json";
 import Lottie from "lottie-react";
+import { Helmet } from 'react-helmet';
 
 const Signup = () => {
     const { createUser, setUser, setLoading, googleSignIn } = use(AuthContext);
@@ -82,7 +83,11 @@ const Signup = () => {
         data-aos="zoom-in-up"
         className="py-28 min-h-[calc(100vh-250px)] flex items-center justify-center flex-col md:flex-row"
       >
-        <div data-aos="fade-left" className='max-w-md xl:max-w-xl'>
+        <Helmet>
+          <title>Signup | LivMate</title>
+        </Helmet>
+
+        <div data-aos="fade-left" className="max-w-md xl:max-w-xl">
           <Lottie animationData={signupAnimation} loop={true} />
         </div>
         <form

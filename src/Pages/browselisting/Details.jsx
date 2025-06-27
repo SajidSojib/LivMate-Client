@@ -12,6 +12,7 @@ import { use } from "react";
 import { AuthContext } from "../../Utility/AuthProvider";
 import postAnimation from '../../assets/postAnimation.json';
 import Lottie from "lottie-react";
+import { Helmet } from "react-helmet";
 
 const Details = () => {
   const {user} = use(AuthContext);
@@ -42,11 +43,18 @@ const Details = () => {
 
   return (
     <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 flex flex-col lg:flex-row items-center justify-center gap-8">
-      <div  className="xl:w-md md:w-sm">
+      <Helmet>
+        <title>Details | LivMate</title>
+      </Helmet>
+
+      <div className="xl:w-md md:w-sm">
         <Lottie animationData={postAnimation} loop={true} />
       </div>
 
-      <div data-aos="fade-right" className="flex flex-col max-w-lg shadow-primary p-6 space-y-6 min-w-xs overflow-hidden rounded-lg shadow-lg bg-info text-primary">
+      <div
+        data-aos="fade-right"
+        className="flex flex-col max-w-lg shadow-primary p-6 space-y-6 min-w-xs overflow-hidden rounded-lg shadow-lg bg-info text-primary"
+      >
         {/* header */}
         <div className="flex justify-between items-center">
           <div className="flex space-x-4">

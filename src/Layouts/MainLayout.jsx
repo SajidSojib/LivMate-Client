@@ -11,12 +11,11 @@ const MainLayout = () => {
     AOS.init({ duration: 1000, anchorPlacement: "top-center" });
   }, []);
     return (
-      <div className="bg-theme text-primary">
+      <div className="bg-theme poppins-regular text-primary">
         {/* bg-gradient-to-l from-[#090979] via-[#00D4FF] to-[#00D4FF] */}
         <div className="bg-neutral">
           <Navbar></Navbar>
         </div>
-
 
         <Suspense
           fallback={
@@ -25,13 +24,12 @@ const MainLayout = () => {
             </div>
           }
         >
-          <div className="min-h-[calc(100vh-463px)]">
+          <div className="poppins-regular min-h-[calc(100vh-463px)]">
             <Outlet></Outlet>
           </div>
         </Suspense>
 
-
-        <div className="bg-neutral">
+        <div className="poppins-regular bg-neutral">
           <Footer></Footer>
         </div>
       </div>

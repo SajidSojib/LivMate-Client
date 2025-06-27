@@ -3,6 +3,7 @@ import { use } from "react";
 import { AuthContext } from "../../Utility/AuthProvider";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const AddRoommate = () => {
   const {user} = use(AuthContext);
@@ -39,12 +40,13 @@ const AddRoommate = () => {
             title: "Roommate Added Successfully",
             timer: 1500,
           })
-        //   e.target.reset();
+          e.target.reset();
         }
       });
   }
   return (
     <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+      <Helmet><title>Add Roommates | LivMate</title></Helmet>
       <form onSubmit={handleSubmit}>
         <div className="mt-14 card-body bg-info w-full max-w-4xl mx-auto mb-24 shrink-0 shadow-primary shadow-2xl p-12 sm:transform sm:scale-105 rounded-3xl">
           <h1 className="text-4xl font-bold text-center text-primary">
@@ -62,6 +64,7 @@ const AddRoommate = () => {
                 type="text"
                 className="input input-primary w-full"
                 placeholder="Add a title"
+                required
               />
             </div>
 
@@ -72,6 +75,7 @@ const AddRoommate = () => {
                 type="text"
                 className="input w-full input-primary"
                 placeholder="Location"
+                required
               />
             </div>
 
@@ -82,6 +86,7 @@ const AddRoommate = () => {
                 type="text"
                 className="input w-full input-primary"
                 placeholder="Rent per month($)"
+                required
               />
             </div>
 
@@ -168,6 +173,7 @@ const AddRoommate = () => {
                 type="text"
                 className="input w-full input-primary"
                 placeholder="Phone/Email"
+                required
               />
             </div>
 
@@ -178,6 +184,7 @@ const AddRoommate = () => {
                 type="text"
                 placeholder="Add a description"
                 className="textarea textarea-primary w-full"
+                required
               ></textarea>
             </div>
 

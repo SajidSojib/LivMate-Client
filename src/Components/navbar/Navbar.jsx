@@ -66,7 +66,7 @@ const Navbar = () => {
             LivMate
           </span>
         </Link>
-        <ul className="items-center hidden space-x-6 lg:flex">
+        <ul data-aos="zoom-in" className="items-center hidden space-x-6 lg:flex">
           <li>
             <NavLink
               to={`/`}
