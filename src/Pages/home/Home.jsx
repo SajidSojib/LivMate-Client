@@ -23,7 +23,7 @@ const Home = () => {
       .then((res) => res.json())
       .then((d) => setQuestions(d));
   }, []);
-
+console.log(posts);
   const navigation = useNavigation();
 
   if (navigation.state === "loading")

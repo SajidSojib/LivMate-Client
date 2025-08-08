@@ -17,7 +17,7 @@ const Feature = ({ posts }) => {
       </p>
       <div className="grid md:grid-cols-2 xl:grid-cols-3 shadow-primary gap-10">
         <Fade cascade damping={0.2}>
-          {posts.map((post, index) => (
+          {posts?.map((post, index) => (
             <div
               data-aos-duration={(index + 1) * 500}
               key={post._id}

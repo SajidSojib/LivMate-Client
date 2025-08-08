@@ -35,7 +35,7 @@ const Hero = () => {
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
-      >
+      > 
         <SwiperSlide className="rounded-xl">
           <div
             className=" rounded-xl text-center bg-cover"
